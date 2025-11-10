@@ -1,0 +1,11 @@
+version: "3.9"
+
+services:
+  crm_antidoto:
+    build: .
+    container_name: crm_antidoto
+    restart: unless-stopped
+    ports:
+      - "8080:80" # acessa em http://SEUIP:8080
+    env_file:
+      - .env # opcional, se quiser usar variáveis
