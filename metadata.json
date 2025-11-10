@@ -1,0 +1,5 @@
+{
+  "name": "CRM Antídoto Digital",
+  "description": "An intelligent CRM application integrated with Chatwoot and Supabase, designed to manage customer relationships, sales pipelines, and AI-driven interactions within the Chatwoot dashboard.",
+  "requestFramePermissions": []
+}
