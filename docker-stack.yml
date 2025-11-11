@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+  crm:
+    image: antidoto/crm:1.0
+    networks:
+      - minha_rede
+    deploy:
+      replicas: 1
+      labels:
+        - "traefik.enable=true"
+        - "traefik.docker.network=minha_rede"
+        - "traefik.http.routers.crm-https.rule=Host(`crm.antidotodigital.com`)"
+        - "traefik.http.routers.crm-https.entrypoints=websecure"
+        - "traefik.http.routers.crm-https.tls=true"
+        - "traefik.http.routers.crm-https.tls.certresolver=letsencryptresolver"
+        - "traefik.http.routers.crm-https.service=crm"
+        - "traefik.http.services.crm.loadbalancer.server.port=80"
+        - "traefik.http.routers.crm-http.rule=Host(`crm.antidotodigital.com`)"
+        - "traefik.http.routers.crm-http.entrypoints=web"
+        - "traefik.http.routers.crm-http.middlewares=crm-redirect"
+        - "traefik.http.middlewares.crm-redirect.redirectscheme.scheme=https"
+
+networks:
+  minha_rede:
+    external: true
