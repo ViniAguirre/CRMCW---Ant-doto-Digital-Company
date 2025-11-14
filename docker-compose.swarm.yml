@@ -1,0 +1,37 @@
+version: "3.9"
+
+services:
+  crm:
+    image: antidotodigital/crm:latest # IMPORTANTE: Altere para a sua imagem, ex: seunome/crm:latest
+    networks:
+      - minha_rede
+    deploy:
+      replicas: 1
+      labels:
+        # --- Traefik Configuration ---
+
+        # 1. Enable Traefik and define the network
+        - "traefik.enable=true"
+        - "traefik.docker.network=minha_rede"
+        
+        # 2. Define the service, pointing to the internal container port
+        - "traefik.http.services.crm.loadbalancer.server.port=80"
+        
+        # 3. Create the secure HTTPS router
+        - "traefik.http.routers.crm-https.rule=Host(`crm.antidotodigital.com`)"
+        - "traefik.http.routers.crm-https.entrypoints=websecure"
+        - "traefik.http.routers.crm-https.service=crm"
+        - "traefik.http.routers.crm-https.tls=true"
+        - "traefik.http.routers.crm-https.tls.certresolver=letsencrypt"
+        
+        # 4. Create the HTTP router for redirection
+        - "traefik.http.routers.crm-http.rule=Host(`crm.antidotodigital.com`)"
+        - "traefik.http.routers.crm-http.entrypoints=web"
+        - "traefik.http.routers.crm-http.middlewares=crm-redirect"
+        
+        # 5. Define the redirection middleware
+        - "traefik.http.middlewares.crm-redirect.redirectscheme.scheme=https"
+
+networks:
+  minha_rede:
+    external: true
