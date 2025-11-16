@@ -126,20 +126,23 @@ const App: React.FC = () => {
   return (
     <div className="flex h-screen font-sans bg-chatwoot-background text-chatwoot-text_primary">
       {!isChatwootView && <Sidebar currentView={currentView} setCurrentView={setCurrentView} />}
-      <main className="flex-1 flex flex-col overflow-hidden">
+      <main className="flex-1 flex flex-col min-w-0">
         {isChatwootView && (
              <header className="sticky top-0 z-10 flex items-center justify-between p-4 bg-white/80 backdrop-blur-sm border-b border-chatwoot-border">
                 <div className="flex items-center space-x-2">
                     <div className="p-1.5 bg-brand-black rounded-md">
                         <AntidotoLogo className="w-6 h-6 text-white" />
                     </div>
-                    <h1 className="text-lg font-semibold text-brand-black">CRM Antídotoo Digital</h1>
+                    <h1 className="text-lg font-semibold text-brand-black">CRM Antídoto Digital</h1>
                 </div>
             </header>
         )}
-        <div className={`flex-1 flex flex-col min-h-0 ${isChatwootView ? "" : "pt-4 md:pt-6 lg:pt-8 px-4 md:px-6 lg:px-8 pb-4 md:pb-6 lg:pb-8"}`}>
+        <div className={`flex-1 overflow-y-auto ${isChatwootView ? "" : "p-4 md:p-6 lg:p-8"}`}>
             {renderContent()}
         </div>
+        <footer className="flex-shrink-0 text-center p-4 border-t border-chatwoot-border text-xs text-chatwoot-text_secondary bg-white">
+          Antídoto Digital Company - Todos os direitos reservados
+        </footer>
       </main>
       {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
     </div>

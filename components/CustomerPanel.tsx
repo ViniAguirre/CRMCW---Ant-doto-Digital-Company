@@ -199,8 +199,8 @@ export const CustomerPanel: React.FC<CustomerPanelProps> = ({ contactId }) => {
   };
 
   return (
-    <div className="bg-white h-full">
-      <div className="p-4 flex items-start space-x-4 border-b border-chatwoot-border">
+    <div className="bg-white h-full flex flex-col">
+      <div className="p-4 flex items-start space-x-4 border-b border-chatwoot-border flex-shrink-0">
         <img src={contact.avatarUrl} alt={contact.name} className="w-16 h-16 rounded-full flex-shrink-0" />
         <div className="flex-1">
           <h2 className="text-xl font-bold text-brand-black">{contact.name}</h2>
@@ -217,14 +217,14 @@ export const CustomerPanel: React.FC<CustomerPanelProps> = ({ contactId }) => {
         </div>
       </div>
 
-      <div className="flex border-b border-chatwoot-border">
+      <div className="flex border-b border-chatwoot-border flex-shrink-0">
         <TabButton icon={<Info className="w-5 h-5"/>} label="Info" isActive={activeTab === 'info'} onClick={() => setActiveTab('info')} />
         <TabButton icon={<Briefcase className="w-5 h-5"/>} label="Negócios" isActive={activeTab === 'deals'} onClick={() => setActiveTab('deals')} />
         <TabButton icon={<CalendarCheck className="w-5 h-5"/>} label="Tarefas" isActive={activeTab === 'tasks'} onClick={() => setActiveTab('tasks')} />
         <TabButton icon={<Sparkles className="w-5 h-5"/>} label="IA" isActive={activeTab === 'ia'} onClick={() => setActiveTab('ia')} />
       </div>
 
-      <div className="overflow-y-auto">
+      <div className="overflow-y-auto flex-1">
         {renderTabContent()}
       </div>
     </div>

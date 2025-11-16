@@ -82,7 +82,7 @@ const PipelineColumn: React.FC<{
       onDragOver={onDragOver}
       onDragLeave={onDragLeave}
       onDrop={(e) => onDrop(e, stage)}
-      className={`flex-shrink-0 w-72 bg-gray-50 rounded-lg transition-colors flex flex-col ${isDragOver ? 'bg-brand-orange/10' : ''} ${isBeingDragged ? 'opacity-50' : ''}`}
+      className={`flex-shrink-0 w-72 bg-gray-50 rounded-lg transition-all flex flex-col border ${isDragOver ? 'bg-brand-orange/10 border-brand-orange/50 shadow-md' : 'border-gray-200'} ${isBeingDragged ? 'opacity-50' : ''}`}
     >
       <div 
         draggable={!isLocked}
@@ -307,8 +307,8 @@ export const PipelineView: React.FC<PipelineViewProps> = ({
           onCancel={() => setStageToDelete(null)}
         />
       )}
-      <h1 className="text-2xl font-bold text-brand-black mb-6">Pipeline de Vendas</h1>
-      <div className="flex-1 flex gap-4 overflow-x-auto pb-4">
+      <h1 className="text-2xl font-bold text-brand-black mb-6 flex-shrink-0">Pipeline de Vendas</h1>
+      <div className="flex-1 flex gap-4 overflow-x-auto pb-4 min-h-0">
         {movableStages.map(stage => (
           <PipelineColumn
             key={stage.id}
